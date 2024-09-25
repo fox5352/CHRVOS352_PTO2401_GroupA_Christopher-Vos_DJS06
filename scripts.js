@@ -23,9 +23,6 @@ console.log("");
 names.forEach((name, index) => console.log(`${name} (${provinces[index]})`));
 
 console.log("");
-names.forEach((name, index) => console.log(`${name} (${provinces[index]})`));
-
-console.log("");
 
 // 2.Uppercase Transformation:
 console.log("Uppercase Transformation:");
@@ -80,7 +77,7 @@ console.log("");
 console.log("Filter by Name Length:", products.filter(product => product.product.length > 5));
 
 console.log("");
-console.log("Price Manipulation:", products.filter(product => product.price.trim() !== "").map(product => parseInt(product.price, 10)).reduce((sum, product) => sum + product));
+console.log("Price Manipulation:", products.filter(product=>product.price.toString().trim() !== "").map(product => parseInt(product.price, 10)).reduce((sum, product) => sum + product));
 
 console.log("");
 
