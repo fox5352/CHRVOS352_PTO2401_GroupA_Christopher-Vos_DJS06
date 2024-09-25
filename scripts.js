@@ -18,8 +18,6 @@ const products = [
 console.log('ForEach Basics:');
 names.forEach(name => console.log(name));
 provinces.forEach(province => console.log(province));
-
-console.log("");
 names.forEach((name, index) => console.log(`${name} (${provinces[index]})`));
 
 console.log("");
@@ -40,44 +38,45 @@ console.log("");
 
 // Sorting
 console.log("Sorting:");
-const sortedProvinces = [...provinces].sort();
+const sortedProvinces = [...provinces].sort();// creates a copy of the provinces since the sort mutates the data
 console.log(sortedProvinces);
 
 console.log("");
 
 // Filtering Cape
 console.log("Filtering Cape:");
-const capeFreeProvinces = [...provinces].filter(province => !province.toLowerCase().includes("cape")).length;
+const capeFreeProvinces = [...provinces].filter(province => !province.includes("Cape")).length;
 console.log(capeFreeProvinces);
 
 console.log("");
 
 // Finding 'S'
 console.log("Finding 'S':");
-const namesWithS = names.map(name => name.includes('S') || name.includes('s'));
+const namesWithS = names.map(name => name.split('').some(char => char.toLowerCase() === 's'));
 console.log(namesWithS);
 
 console.log("");
 
 // 7. Creating Object Mapping
 console.log("Creating Object Mapping:");
-const nameProvinceMap = names.reduce((obj, name, index) => {
-  obj[name] = provinces[index];
-  return obj;
-}, {});
+const nameProvinceMap = names.reduce((obj, name, index) => {// gets the object, name, and index of array
+  obj[name] = provinces[index];// assigns name=province(index) eg {Ashwin: Western Cape}
+  return obj;// returns the object
+}, {});// Initial empty object to store the mappings
 console.log(nameProvinceMap);
 
 console.log("");
 
 console.log("Advanced Exercises");
-console.log("Log Products:", products.map((product) => product.product));
+console.log("Log Products:", products.map(product => product.product));
+
 
 console.log("");
 
-console.log("Filter by Name Length:", products.filter(product => product.product.length > 5));
+console.log("Filter by Name Length:", products.filter(product => product.product.length <= 5));
 
 console.log("");
-console.log("Price Manipulation:", products.filter(product=>product.price.toString().trim() !== "").map(product => parseInt(product.price, 10)).reduce((sum, product) => sum + product));
+console.log("Price Manipulation:", products.filter(product=>product.price.toString().trim() !== "").map(product => parseFloat(product.price, 10)).reduce((sum, product) => sum + product));
 
 console.log("");
 
@@ -85,20 +84,21 @@ console.log("Concatenate Product Names:", products.reduce((sum, product) => sum 
 
 console.log("");
 
-console.log("Find Extremes in Prices:", products.filter(product=>product.price.toString().trim() !== "").map(product => parseInt(product.price, 10)).reduce((extremes, price)=>{
-  const intPrice = parseInt(price, 10);
-  const high = extremes.high !== undefined ? extremes.high : 0;
-  const low = extremes.low!== undefined? extremes.low : 9_999_999;
+console.log("Find Extremes in Prices:", products.filter(product=>product.price.toString().trim() !== "").map(product => parseFloat(product.price, 10)).reduce((extremes, price)=>{
+  const high = extremes.high// gets the highest from extremes
+  const low = extremes.low// gets the lowest from extremes
 
   return {
-    high: intPrice > high? intPrice : high,
-    low: intPrice < low? intPrice : low,
-  }
-}));
+    high: price > high ? price : high, // Find the highest price between extremes(high) and current price
+    low: price < low ? price : low // Find the lowest price between extremes(low) and current price
+  };
+},
+{ high: 0, low: Infinity}// initial values for the high and low 
+));
 
 console.log("");
-
-console.log("Object Transformation:", products.reduce((obj, product) =>{
-  obj[product.product] = Number(product.price);
+// 6. Object Transformation
+console.log('Transformed Products:', products.reduce((obj, p) => {
+  obj[p.product] = Number(p.price);
   return obj;
 }, {}));
