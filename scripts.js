@@ -98,7 +98,8 @@ console.log("Find Extremes in Prices:", products.filter(product=>product.price.t
 
 console.log("");
 // 6. Object Transformation
-console.log('Transformed Products:', products.reduce((obj, p) => {
-  obj[p.product] = Number(p.price);
-  return obj;
-}, {}));
+console.log('Transformed Products:', products.reduce((arr, product)=>{
+  const [[productKey, productValue], [priceKey, priceValue]] = Object.entries(product);// uses Object.entries to destructure product 
+  arr.push({name: productValue, cost: priceValue});
+  return arr;
+}, []));
