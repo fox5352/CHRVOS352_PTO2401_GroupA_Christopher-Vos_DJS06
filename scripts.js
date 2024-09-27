@@ -23,51 +23,46 @@ names.forEach((name, index) => console.log(`${name} (${provinces[index]})`));
 console.log("");
 
 // 2.Uppercase Transformation:
-console.log("Uppercase Transformation:");
 const uppercaseProvinces = provinces.map(province => province.toUpperCase());
-console.log(uppercaseProvinces);
+console.log("Uppercase Transformation:", uppercaseProvinces);
 
 console.log("");
 
 // Name Lengths
-console.log("Name Lengths:");
 const nameLengths = names.map(name => name.length);
-console.log(nameLengths);
+console.log("Name Lengths:",nameLengths);
 
 console.log("");
 
 // Sorting
-console.log("Sorting:");
 const sortedProvinces = [...provinces].sort();// creates a copy of the provinces since the sort mutates the data
-console.log(sortedProvinces);
+console.log("Sorting:", sortedProvinces);
 
 console.log("");
 
 // Filtering Cape
-console.log("Filtering Cape:");
 const capeFreeProvinces = [...provinces].filter(province => !province.includes("Cape")).length;
-console.log(capeFreeProvinces);
+console.log("Filtering Cape:", capeFreeProvinces);
 
 console.log("");
 
 // Finding 'S'
-console.log("Finding 'S':");
 const namesWithS = names.map(name => name.split('').some(char => char.toLowerCase() === 's'));
-console.log(namesWithS);
+console.log("Finding 'S':", namesWithS);
 
 console.log("");
 
 // 7. Creating Object Mapping
-console.log("Creating Object Mapping:");
 const nameProvinceMap = names.reduce((obj, name, index) => {// gets the object, name, and index of array
   obj[name] = provinces[index];// assigns name=province(index) eg {Ashwin: Western Cape}
   return obj;// returns the object
 }, {});// Initial empty object to store the mappings
-console.log(nameProvinceMap);
+console.log("Creating Object Mapping:", nameProvinceMap);
 
 console.log("");
 
 console.log("Advanced Exercises");
+
 console.log("Log Products:", products.map(product => product.product));
 
 
@@ -99,7 +94,7 @@ console.log("Find Extremes in Prices:", products.filter(product=>product.price.t
 console.log("");
 // 6. Object Transformation
 console.log('Transformed Products:', products.reduce((arr, product)=>{
-  const [[productKey, productValue], [priceKey, priceValue]] = Object.entries(product);// uses Object.entries to destructure product 
+  const [[_productKey, productValue], [_priceKey, priceValue]] = Object.entries(product);// uses Object.entries to destructure product 
   arr.push({name: productValue, cost: priceValue});
   return arr;
 }, []));
